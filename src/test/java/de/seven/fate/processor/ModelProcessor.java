@@ -1,7 +1,8 @@
 package de.seven.fate.processor;
 
 import de.seven.fate.annotation.Model;
-import de.seven.fate.model.ModelBuilder;
+import de.seven.fate.model.builder.ModelBuilder;
+import de.seven.fate.model.builder.ModelBuilderFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.stereotype.Component;
@@ -34,7 +35,7 @@ public class ModelProcessor implements BeanPostProcessor {
 
     private <T> T getModelValue(Class<T> modelType, Model model) {
 
-        ModelBuilder<T> modelBuilder = modelBuilderSet.stream().filter((builder) -> builder.getTargetType() == modelType).findFirst().get();
+        ModelBuilder<T> modelBuilder = ModelBuilderFactory.findOrCreate(modelType, modelBuilders);
 
         switch (model.type()) {
             case MIN:
@@ -54,5 +55,5 @@ public class ModelProcessor implements BeanPostProcessor {
     }
 
     @Inject
-    private Set<ModelBuilder> modelBuilderSet;
+    private Set<ModelBuilder> modelBuilders;
 }

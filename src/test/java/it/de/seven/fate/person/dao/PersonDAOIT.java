@@ -1,12 +1,10 @@
-package it.de.seven.fate.message.dao;
+package it.de.seven.fate.person.dao;
 
 import de.seven.fate.Application;
 import de.seven.fate.annotation.Model;
 import de.seven.fate.annotation.Models;
-import de.seven.fate.enums.ModelType;
-import de.seven.fate.enums.ModelsType;
-import de.seven.fate.message.dao.MessageDAO;
-import de.seven.fate.message.domain.Message;
+import de.seven.fate.person.dao.PersonDAO;
+import de.seven.fate.person.domain.Person;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -23,16 +22,17 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 @ActiveProfiles("test")
-public class MessageDAOIT {
+@Transactional
+public class PersonDAOIT {
 
     @Inject
-    MessageDAO sut;
+    PersonDAO sut;
 
-    @Model(type = ModelType.MIN)
-    Message model;
+    @Model
+    Person model;
 
-    @Models(type = ModelsType.LIST, size = -1)
-    List<Message> models;
+    @Models
+    List<Person> models;
 
     @Before
     public void setUp() {
@@ -48,4 +48,5 @@ public class MessageDAOIT {
     public void tearDown() throws Exception {
         sut.deleteAll();
     }
+
 }

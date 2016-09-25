@@ -1,4 +1,4 @@
-package de.seven.fate.model;
+package de.seven.fate.model.builder;
 
 import java.util.*;
 

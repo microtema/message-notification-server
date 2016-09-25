@@ -1,0 +1,29 @@
+package de.seven.fate.builder;
+
+import de.seven.fate.model.builder.AbstractModelBuilder;
+import de.seven.fate.person.domain.Person;
+import org.springframework.stereotype.Component;
+
+import javax.inject.Inject;
+import java.util.UUID;
+
+@Component
+public class PersonBuilder extends AbstractModelBuilder<Person> {
+
+    private final MessageBuilder messageBuilder;
+
+    @Inject
+    public PersonBuilder(MessageBuilder messageBuilder) {
+        this.messageBuilder = messageBuilder;
+    }
+
+    @Override
+    public Person min() {
+        Person min = new Person();
+
+        min.setLdapId(UUID.randomUUID().toString());
+        min.setMessages(messageBuilder.list());
+
+        return min;
+    }
+}
