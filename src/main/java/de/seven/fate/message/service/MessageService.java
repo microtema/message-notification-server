@@ -8,6 +8,7 @@ import de.seven.fate.person.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -74,11 +75,18 @@ public class MessageService {
         notNull(messages);
         notNull(person);
 
-        Person attachedPerson = personDAO.findOne(person.getId());
+        if (messages.isEmpty()) {
+            logger.warn("ignore empty messages by: " + person.getLdapId());
+
+            return;
+        }
+
+        Person attachedPerson = personDAO.findByLdapId(person.getLdapId());
 
         if (attachedPerson == null) {
 
             logger.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
+
             return;
         }
 
@@ -87,6 +95,9 @@ public class MessageService {
         }
 
         dao.save(messages);
+
+        logger.debug("save [" + messages.size() + "] message(s) by person: " + person.getLdapId());
+
     }
 
     public void removeAllMessage(String personLdapId) {
