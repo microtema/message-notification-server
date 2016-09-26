@@ -1,20 +1,17 @@
 package de.seven.fate.rest;
 
 import de.seven.fate.message.resource.MessageResource;
+import org.glassfish.jersey.server.ResourceConfig;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
+@Component
 @ApplicationPath("/rest")
-public class RestApplication extends Application {
+public class RestApplication extends ResourceConfig {
 
-    private static final Set<Class<?>> classSet = new HashSet<Class<?>>(Arrays.asList(MessageResource.class));
-
-    @Override
-    public Set<Class<?>> getClasses() {
-        return classSet;
+    public RestApplication() {
+        // Packages to be scanned for REST annotations
+        register(MessageResource.class);
     }
 }
