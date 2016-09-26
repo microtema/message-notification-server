@@ -16,7 +16,9 @@ public class XmlMessageProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {
+
         MessagesDTO messagesDTO = exchange.getIn().getBody(MessagesDTO.class);
+
         messageService.process(messagesDTO.getMessages());
     }
 }

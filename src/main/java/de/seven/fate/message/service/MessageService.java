@@ -117,7 +117,6 @@ public class MessageService {
         }
 
         int executeUpdate = dao.markMessage(messageIds, messageType);
-        // int executeUpdate = dao.createNamedQuery(Message.UPDATE_TYPE, "ids", messageIds, "messageType", messageType).executeUpdate();
 
         logger.info("update " + executeUpdate + " messages to type: " + messageType);
     }
