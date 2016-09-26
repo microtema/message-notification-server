@@ -24,6 +24,8 @@ public class PersonBuilder extends AbstractModelBuilder<Person> {
         min.setLdapId(UUID.randomUUID().toString());
         min.setMessages(messageBuilder.list());
 
+        min.getMessages().forEach(message -> message.setPerson(min));
+
         return min;
     }
 }

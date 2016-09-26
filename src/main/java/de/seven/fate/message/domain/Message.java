@@ -13,6 +13,7 @@ import java.util.Date;
 @Entity
 @Data
 @EqualsAndHashCode(exclude = { "id" })
+@NamedQueries(@NamedQuery(name = "Message.markMessage", query = "UPDATE Message m SET m.messageType = ?2 WHERE m.id IN (?1)"))
 public class Message extends BaseEntity {
 
     @NotNull

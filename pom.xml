@@ -68,6 +68,22 @@
 			<version>3.4</version>
 		</dependency>
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.0</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.8.3</version>
+			<exclusions>
+				<exclusion>
+					<groupId>commons-beanutils</groupId>
+					<artifactId>commons-beanutils</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
@@ -85,7 +101,7 @@
 	</dependencies>
 
 	<build>
-		<plugins>
+		<!--plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -98,7 +114,9 @@
 						<include>**/*Test.java</include>
 						<include>**/*IT.java</include>
 					</includes>
-				</configuration>
+                    <useSystemClassLoader>true</useSystemClassLoader>
+                    <useManifestOnlyJar>false</useManifestOnlyJar>
+                </configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -111,7 +129,7 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>
+		</plugins-->
 	</build>
 
 	<profiles>
