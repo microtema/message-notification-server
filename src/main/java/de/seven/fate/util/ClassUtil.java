@@ -1,5 +1,6 @@
 package de.seven.fate.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -26,4 +27,18 @@ public final class ClassUtil {
             throw new RuntimeException(e);
         }
     }
+    public static int getIndexOfParameter(Annotation[][] annotations, Class<?> annotationType) {
+
+        for (int index = 0; index < annotations.length; index++) {
+            Annotation[] subAnnotations = annotations[index];
+            for (Annotation annotation : subAnnotations) {
+                if (annotation.annotationType() == annotationType) {
+                    return index;
+                }
+            }
+        }
+
+        return -1;
+    }
+
 }
