@@ -17,6 +17,7 @@ public class MessageBuilder extends AbstractModelBuilder<Message> {
 
         min.setDescription(UUID.randomUUID().toString());
         min.setImage(UUID.randomUUID().toString());
+        min.setTitle(UUID.randomUUID().toString());
         min.setPubDate(new Date());
         min.setMessageType(MessageType.UNREAD);
 

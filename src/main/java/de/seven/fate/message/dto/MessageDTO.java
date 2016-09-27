@@ -18,6 +18,9 @@ public class MessageDTO {
     private PersonDTO person;
 
     @XmlElement(required = true, nillable = false)
+    private String title;
+
+    @XmlElement(required = true, nillable = false)
     @XmlJavaTypeAdapter(CollapsedStringAdapter.class)
     private String description;
 
@@ -28,8 +31,7 @@ public class MessageDTO {
     @XmlElement(required = false)
     private Date pubDate;
 
-    @XmlElement(required = false)
-    private String title;
+
 
     public PersonDTO getPerson() {
         return person;
