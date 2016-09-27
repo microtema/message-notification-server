@@ -23,3 +23,7 @@ nbdist/
 .nb-gradle/
 
 .mvn/
+.mvn/wrapper
+src/main/resources/static/
+src/main/resources/templates/
+src/test/java/de/seven/fate/model/generator/
