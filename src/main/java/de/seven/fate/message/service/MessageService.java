@@ -8,7 +8,6 @@ import de.seven.fate.person.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.Arrays;
@@ -85,9 +84,11 @@ public class MessageService {
 
         if (attachedPerson == null) {
 
-            logger.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
+            //logger.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
+            logger.warn("unable to find person by: " + person.getLdapId() + " person will be created");
 
-            return;
+            attachedPerson = personDAO.save(person);
+            //return;
         }
 
         for (Message message : messages) {
