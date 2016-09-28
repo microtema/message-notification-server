@@ -36,6 +36,17 @@ Message
 * **mvn clean install**  ( compile, test, build and install to maven repository)
 * **mvn clean install -Pintegration-test,production**  ( compile, test, build and install to maven repository with given profiles)
 
+### Using Technologies
+
+* **Java EE**  ( 6 )
+* **Spring Boot**  ( 1.4.1.RELEASE )
+* **Spring AOP **  ( 1.4.1.RELEASE )
+* **Spring Data **  ( 1.4.1.RELEASE )
+* **Spring Web Socket **  ( 1.4.1.RELEASE )
+* **Spring Actuator **  ( 1.4.1.RELEASE )
+* **Lombok**  ( 1.16.10 )
+* **Apache Camel Route**  ( 2.16.4 )
+* **Apache Camel Jaxb**  ( 2.17.0 )
 
 We'll be building a simple but realistic Message Notification Center with Spring Boot that you can read and edit, a basic version of the realtime Messages offered by RESTServer.
 
