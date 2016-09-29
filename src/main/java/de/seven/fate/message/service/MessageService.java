@@ -74,12 +74,21 @@ public class MessageService {
         notNull(messages);
         notNull(person);
 
-        Person attachedPerson = personDAO.findOne(person.getId());
+        if (messages.isEmpty()) {
+            logger.warn("ignore empty messages by: " + person.getLdapId());
+
+            return;
+        }
+
+        Person attachedPerson = personDAO.findByLdapId(person.getLdapId());
 
         if (attachedPerson == null) {
 
-            logger.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
-            return;
+            //logger.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
+            logger.warn("unable to find person by: " + person.getLdapId() + " person will be created");
+
+            attachedPerson = personDAO.save(person);
+            //return;
         }
 
         for (Message message : messages) {
@@ -87,6 +96,9 @@ public class MessageService {
         }
 
         dao.save(messages);
+
+        logger.debug("save [" + messages.size() + "] message(s) by person: " + person.getLdapId());
+
     }
 
     public void removeAllMessage(String personLdapId) {
@@ -106,7 +118,6 @@ public class MessageService {
         }
 
         int executeUpdate = dao.markMessage(messageIds, messageType);
-        // int executeUpdate = dao.createNamedQuery(Message.UPDATE_TYPE, "ids", messageIds, "messageType", messageType).executeUpdate();
 
         logger.info("update " + executeUpdate + " messages to type: " + messageType);
     }

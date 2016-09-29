@@ -25,6 +25,9 @@ public class Message extends BaseEntity {
     private String image;
 
     @NotNull
+    private String title;
+
+    @NotNull
     @Column(name = "PUB_DATE")
     private Date pubDate;
 
@@ -33,7 +36,7 @@ public class Message extends BaseEntity {
     @Column(name = "MESSAGE_TYPE")
     private MessageType messageType;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private Person person;
 
 }
