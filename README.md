@@ -57,6 +57,7 @@ We'll provide:
 * JPA Hooks to provide SSE Broadcast for frontend
 * Junit Test and IT
 * CDD and TDD
+* Cache Abstraction
 
 It'll also have a few neat features:
 
