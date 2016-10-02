@@ -14,6 +14,8 @@ import static de.seven.fate.util.ClassUtil.getIndexOfParameter;
 public class UserNameInterceptor {
 
 
+    // @Around("execution(* de.seven.fate.message.resource.MessageResource.getMassages(..))")
+    // @Around("execution(* de.seven.fate..resource.*.*(..))")
     @Around("execution(* de.seven.fate.message.resource.MessageResource.*(..))")
     public Object intercept(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 

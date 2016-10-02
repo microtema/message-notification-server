@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest(classes = Application.class)
 @ActiveProfiles("test")
 @Transactional
-public class PersonDAOTest {
+public class PersonDAOIT {
 
     @Inject
     PersonDAO sut;
