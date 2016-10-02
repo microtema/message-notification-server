@@ -1,9 +1,11 @@
 package de.seven.fate.message.route;
 
+import de.seven.fate.message.Constants;
 import de.seven.fate.message.dto.MessagesDTO;
 import de.seven.fate.message.service.XmlMessageService;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

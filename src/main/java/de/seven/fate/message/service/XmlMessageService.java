@@ -1,11 +1,13 @@
 package de.seven.fate.message.service;
 
+import de.seven.fate.message.Constants;
 import de.seven.fate.message.converter.MessageDTO2MessageConverter;
 import de.seven.fate.message.domain.Message;
 import de.seven.fate.message.dto.MessageDTO;
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +27,6 @@ public class XmlMessageService {
 
     @Inject
     private MessageDTO2MessageConverter converter;
-
 
     public void process(List<MessageDTO> messageDTOList) {
         notNull(messageDTOList);

@@ -15,9 +15,10 @@ import static javax.xml.bind.JAXBContext.newInstance;
 @Component
 public class MessageRoute extends RouteBuilder {
 
-    @Value("${route.message.from}")
+    @Value("${message.route.from}")
     private String uri;
 
+    @Value("${message.schema.location}")
     private String schemaLocation;
 
     @Inject
@@ -32,7 +33,7 @@ public class MessageRoute extends RouteBuilder {
 
         messagesData.setContext(newInstance(MessagesDTO.class));
 
-        messagesData.setSchema("classpath:message-schema.xsd");
+        messagesData.setSchema(schemaLocation);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package de.seven.fate.message.service;
 
+import de.seven.fate.message.Constants;
 import de.seven.fate.message.dao.MessageDAO;
 import de.seven.fate.message.domain.Message;
 import de.seven.fate.message.enums.MessageType;
@@ -7,6 +8,7 @@ import de.seven.fate.person.dao.PersonDAO;
 import de.seven.fate.person.domain.Person;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,6 +62,7 @@ public class MessageService {
 
         saveMessage(Arrays.asList(message), message.getPerson());
     }
+
 
     public void saveMessage(List<Message> messages) {
 
