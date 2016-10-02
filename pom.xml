@@ -6,7 +6,7 @@
 	<groupId>de.seven.fate</groupId>
 	<artifactId>e2open-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>e2open-server</name>
 	<description>Message Notification Center</description>
@@ -106,10 +106,13 @@
 	</dependencies>
 
 	<build>
-		<!--plugins>
+		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>de.seven.fate.Application</mainClass>
+				</configuration>
 			</plugin>
 			<plugin>
 				<artifactId>maven-failsafe-plugin</artifactId>
@@ -134,7 +137,7 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins-->
+		</plugins>
 	</build>
 
 	<profiles>

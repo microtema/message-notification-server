@@ -49,6 +49,7 @@ public class MessageDAOTest {
     @Before
     public void setUp() {
 
+        sut.deleteAll();
         model = person.getMessages().stream().findAny().get();
         personDAO.save(person);
     }
@@ -56,11 +57,6 @@ public class MessageDAOTest {
     @Test
     public void findOne() {
         assertEquals(model, sut.findOne(model.getId()));
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        sut.deleteAll();
     }
 
     @Test

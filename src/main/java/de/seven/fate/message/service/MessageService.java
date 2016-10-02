@@ -46,6 +46,8 @@ public class MessageService {
 
     public void removeMessage(Message message) {
 
+        message.setPerson(null);
+
         dao.delete(message);
     }
 
@@ -87,7 +89,8 @@ public class MessageService {
 
             logger.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
 
-            return;
+            attachedPerson = personDAO.save(person);
+            // return;
         }
 
         for (Message message : messages) {

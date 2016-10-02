@@ -36,6 +36,7 @@ public class PersonDAOTest {
 
     @Before
     public void setUp() {
+        sut.deleteAll();
         model = sut.save(model);
     }
 
@@ -47,11 +48,6 @@ public class PersonDAOTest {
     @Test
     public void findByLdapId() {
         assertEquals(model, sut.findByLdapId(model.getLdapId()));
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        sut.deleteAll();
     }
 
 }
