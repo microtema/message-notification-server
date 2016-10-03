@@ -161,6 +161,16 @@
 				<spring.profiles.active>dev</spring.profiles.active>
 			</properties>
 		</profile>
+		<profile>
+			<id>test</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<skip.integration-tests>false</skip.integration-tests>
+				<spring.profiles.active>test</spring.profiles.active>
+			</properties>
+		</profile>
 	</profiles>
 
 	<developers>

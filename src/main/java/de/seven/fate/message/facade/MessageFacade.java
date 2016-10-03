@@ -1,10 +1,11 @@
 package de.seven.fate.message.facade;
 
 import de.seven.fate.event.MessageEventData;
+import de.seven.fate.event.service.MessageEventService;
 import de.seven.fate.message.Constants;
 import de.seven.fate.message.bo.MessageBO;
-import de.seven.fate.message.converter.Message2MessageBOModelConverter;
-import de.seven.fate.message.converter.MessageBO2MessageModelConverter;
+import de.seven.fate.message.converter.Message2MessageBOConverter;
+import de.seven.fate.message.converter.MessageBO2MessageConverter;
 import de.seven.fate.message.domain.Message;
 import de.seven.fate.message.enums.MessageType;
 import de.seven.fate.message.service.MessageService;
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.util.List;
 
+import static org.apache.commons.lang3.Validate.notNull;
+
 @Slf4j
 @Component
 public class MessageFacade {
@@ -26,10 +29,10 @@ public class MessageFacade {
     private MessageService service;
 
     @Inject
-    private Message2MessageBOModelConverter message2MessageBOConverter;
+    private Message2MessageBOConverter message2MessageBOConverter;
 
     @Inject
-    private MessageBO2MessageModelConverter messageBO2MessageConverter;
+    private MessageBO2MessageConverter messageBO2MessageConverter;
 
     /**
      * first lookup in user cache than in DB
@@ -39,7 +42,7 @@ public class MessageFacade {
      */
     @Cacheable(Constants.MESSAGE_CACHE)
     public List<MessageBO> findMessagesByPerson(String ldapId) {
-        Validate.notNull(ldapId);
+        notNull(ldapId);
 
         List<Message> messages = service.findMessagesByPerson(ldapId);
 
@@ -48,7 +51,7 @@ public class MessageFacade {
 
     @CacheEvict(cacheNames = Constants.MESSAGE_CACHE, allEntries = true)
     public MessageBO updateMassage(String ldapId, MessageBO messageBO) {
-        Validate.notNull(messageBO);
+        notNull(messageBO);
 
         Message message = messageBO2MessageConverter.convert(messageBO);
 
@@ -84,11 +87,11 @@ public class MessageFacade {
     }
 
     @CacheEvict(cacheNames = Constants.MESSAGE_CACHE, allEntries = true)
-    public Boolean markMessageAsRead(String personLdapId, List<Long> messageIds) {
+    public MessageType markMessageAsRead(String personLdapId, List<Long> messageIds) {
 
         service.markMessage(messageIds, MessageType.READ);
 
-        return Boolean.TRUE;
+        return MessageType.READ;
     }
 
     @EventListener

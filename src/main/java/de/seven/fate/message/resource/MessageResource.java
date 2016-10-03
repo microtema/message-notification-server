@@ -23,7 +23,7 @@ public class MessageResource {
     private MessageFacade facade;
 
     @GET
-    public Response getMassages(@UserName String userName) {
+    public Response getMessages(@UserName String userName) {
         logger.debug("get  messages for user: " + userName);
 
         return Response.ok(facade.findMessagesByPerson(userName)).build();
@@ -31,7 +31,7 @@ public class MessageResource {
 
     @GET
     @Path("/type/{type}")
-    public Response getMassagesByType(@UserName String userName, @PathParam("type") MessageType messageType) {
+    public Response getMessagesByType(@UserName String userName, @PathParam("type") MessageType messageType) {
         logger.debug("get messages for user: " + userName + " adn type: " + messageType);
 
         return Response.ok(facade.findMessagesByPersonAndType(userName, messageType)).build();
@@ -47,7 +47,7 @@ public class MessageResource {
 
     @DELETE
     @Path("/{messageIds}")
-    public Response deleteMassage(@UserName String userName, @PathParam("messageIds") String messageIds) {
+    public Response deleteMessage(@UserName String userName, @PathParam("messageIds") String messageIds) {
         logger.debug("delete  messages: " + messageIds);
 
         return Response.ok(facade.deleteMassage(userName, NumberUtil.parseLong(messageIds.split(",")))).build();
@@ -55,7 +55,7 @@ public class MessageResource {
 
     @DELETE
     @Path("/all")
-    public Response deleteAllCurrentUserMassages(@UserName String userName) {
+    public Response deleteAllCurrentUserMessages(@UserName String userName) {
         logger.debug("delete  all messages for current user: " + userName);
 
         return Response.ok(facade.deleteMassage(userName)).build();

@@ -7,7 +7,7 @@ import de.seven.fate.message.enums.MessageType;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MessageBO2MessageModelConverter extends AbstractModelConverter<Message, MessageBO> {
+public class MessageBO2MessageConverter extends AbstractModelConverter<Message, MessageBO> {
 
     @Override
     public void update(Message dest, MessageBO orig) {

@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -50,28 +52,15 @@ public abstract class AbstractModelConverter<D, O> implements ModelConverter<D, 
             return Collections.emptyList();
         }
 
-        List<D> list = new ArrayList<D>();
-
-        for (O entry : entries) {
-            list.add(convert(entry));
-        }
-
-        return list;
+        return entries.stream().map(this::convert).collect(Collectors.toList());
     }
 
     public Set<D> convertSet(Collection<O> entries) {
-
         if (isEmpty(entries)) {
-            return Collections.<D>emptySet();
+            return Collections.emptySet();
         }
 
-        Set<D> set = new HashSet<D>();
-
-        for (O entry : entries) {
-            set.add(convert(entry));
-        }
-
-        return set;
+        return entries.stream().map(this::convert).collect(Collectors.toSet());
     }
 
     public Class<D> getDestinationType() {

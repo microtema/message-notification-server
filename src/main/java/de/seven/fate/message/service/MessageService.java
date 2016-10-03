@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -49,13 +50,12 @@ public class MessageService {
     public void removeMessage(Message message) {
 
         message.setPerson(null);
-
         dao.delete(message);
     }
 
     public void removeMessage(Long messageId) {
 
-        dao.delete(messageId);
+        removeMessage(dao.findOne(messageId));
     }
 
     public void saveMessage(Message message) {

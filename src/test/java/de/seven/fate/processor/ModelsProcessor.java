@@ -42,8 +42,12 @@ public class ModelsProcessor implements BeanPostProcessor {
         switch (models.type()) {
             case LIST:
                 return modelBuilder.list(models.size());
+            case FIX_LIST:
+                return modelBuilder.fixList();
             case SET:
                 return modelBuilder.set(models.size());
+            case FIX_SET:
+                return modelBuilder.fixSet();
         }
 
         throw new IllegalStateException("Unsupported models type: " + models.type());

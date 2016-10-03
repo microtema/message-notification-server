@@ -25,9 +25,9 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
-@ActiveProfiles("test")
 @Transactional
 public class MessageDAOIT {
 
@@ -43,13 +43,12 @@ public class MessageDAOIT {
     @Model
     Person person;
 
-    @Models(type = ModelsType.LIST, size = -1)
+    @Models
     List<Message> models;
 
     @Before
     public void setUp() {
 
-        sut.deleteAll();
         model = person.getMessages().stream().findAny().get();
         personDAO.save(person);
     }

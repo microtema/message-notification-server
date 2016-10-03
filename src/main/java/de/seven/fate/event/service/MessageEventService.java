@@ -1,18 +1,25 @@
 package de.seven.fate.event.service;
 
 import de.seven.fate.event.MessageEventData;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+@Slf4j
 @Component
 public class MessageEventService {
 
     @Inject
     private ApplicationEventPublisher eventPublisher;
 
+    @PostConstruct
+    private void init() {
+        log.debug("init " + MessageEventService.class.getCanonicalName());
+    }
 
     public void firePersistEvent(String ldapId) {
 

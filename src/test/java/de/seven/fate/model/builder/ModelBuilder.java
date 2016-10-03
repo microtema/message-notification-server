@@ -26,6 +26,11 @@ public interface ModelBuilder<T> {
     T random();
 
     /**
+     * @return new Instance of Model and init within fix values
+     */
+    T fix();
+
+    /**
      * @return new List by random size with new Instances of Models and init as Min or Max
      */
     List<T> list();
@@ -37,6 +42,11 @@ public interface ModelBuilder<T> {
     List<T> list(int size);
 
     /**
+     * @return new Set by fix size with new Instances of Models and init as Fix
+     */
+    List<T> fixList();
+
+    /**
      * @return new Set by random size with new Instances of Models and init as Min or Max
      */
     Set<T> set();
@@ -46,4 +56,9 @@ public interface ModelBuilder<T> {
      * @return new Set by fixed size with new Instances of Models and init as Min or Max
      */
     Set<T> set(int size);
+
+    /**
+     * @return new List by fix size with new Instances of Models and init as Fix
+     */
+    Set<T> fixSet();
 }

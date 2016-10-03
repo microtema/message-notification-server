@@ -7,11 +7,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class MessageBO2MessageModelConverterTest {
+public class MessageBO2MessageConverterTest {
 
-    MessageBO2MessageModelConverter sut = new MessageBO2MessageModelConverter();
+    MessageBO2MessageConverter sut = new MessageBO2MessageConverter();
 
-    Message2MessageBOModelConverter message2MessageBOModelConverter = new Message2MessageBOModelConverter();
+    Message2MessageBOConverter message2MessageBOConverter = new Message2MessageBOConverter();
 
     MessageBOBuilder builder = new MessageBOBuilder();
 
@@ -36,7 +36,7 @@ public class MessageBO2MessageModelConverterTest {
 
         assertNotNull(model);
 
-        assertEquals(bo, message2MessageBOModelConverter.convert(model));
+        assertEquals(bo, message2MessageBOConverter.convert(model));
     }
 
 }

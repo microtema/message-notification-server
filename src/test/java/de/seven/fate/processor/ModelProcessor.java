@@ -44,6 +44,8 @@ public class ModelProcessor implements BeanPostProcessor {
                 return modelBuilder.max();
             case RANDOM:
                 return modelBuilder.random();
+            case FIX:
+                return modelBuilder.fix();
         }
 
         throw new IllegalStateException("Unsupported model type: " + model.type());
