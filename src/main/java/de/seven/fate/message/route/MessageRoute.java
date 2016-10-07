@@ -27,7 +27,7 @@ public class MessageRoute extends RouteBuilder {
     private JaxbDataFormat messagesData;
 
     @PostConstruct
-    public void init() throws JAXBException {
+    private void init() throws JAXBException { //NOSONAR
 
         messagesData = new JaxbDataFormat();
 

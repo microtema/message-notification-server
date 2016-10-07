@@ -1,29 +1,23 @@
 package de.seven.fate.message.service;
 
-import de.seven.fate.message.Constants;
 import de.seven.fate.message.dao.MessageDAO;
 import de.seven.fate.message.domain.Message;
 import de.seven.fate.message.enums.MessageType;
 import de.seven.fate.person.dao.PersonDAO;
 import de.seven.fate.person.domain.Person;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.cache.annotation.CacheEvict;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.Validate.notNull;
 
+@Slf4j
 @Service
 public class MessageService {
-
-    private static final Logger logger = LoggerFactory.getLogger(MessageService.class);
 
     @Inject
     private MessageDAO dao;
@@ -81,7 +75,7 @@ public class MessageService {
         notNull(person);
 
         if (messages.isEmpty()) {
-            logger.warn("ignore empty messages by: " + person.getLdapId());
+            log.warn("ignore empty messages by: " + person.getLdapId());
 
             return;
         }
@@ -90,10 +84,10 @@ public class MessageService {
 
         if (attachedPerson == null) {
 
-            logger.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
+            log.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
 
             attachedPerson = personDAO.save(person);
-            // return;
+            // return; //NOSONAR this is workaround and will be removed in production env.
         }
 
         for (Message message : messages) {
@@ -102,7 +96,7 @@ public class MessageService {
 
         dao.save(messages);
 
-        logger.debug("save [" + messages.size() + "] message(s) by person: " + person.getLdapId());
+        log.debug("save [" + messages.size() + "] message(s) by person: " + person.getLdapId());
 
     }
 
@@ -124,6 +118,6 @@ public class MessageService {
 
         int executeUpdate = dao.markMessage(messageIds, messageType);
 
-        logger.info("update " + executeUpdate + " messages to type: " + messageType);
+        log.info("update " + executeUpdate + " messages to type: " + messageType);
     }
 }

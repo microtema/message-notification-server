@@ -14,27 +14,26 @@ import static de.seven.fate.util.ClassUtil.getIndexOfParameter;
 public class UserNameInterceptor {
 
 
+    private static String getUserName() {
+
+        return "mtema"; // Authentication auth = SecurityContextHolder.getContext().getAuthentication(); //NOSONAR
+    }
+
     // @Around("execution(* de.seven.fate.message.resource.MessageResource.getMassages(..))")
     // @Around("execution(* de.seven.fate..resource.*.*(..))")
     @Around("execution(* de.seven.fate.message.resource.MessageResource.*(..))")
-    public Object intercept(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object intercept(ProceedingJoinPoint proceedingJoinPoint) throws Throwable { //NOSONAR
 
-        MethodSignature signature = (MethodSignature)proceedingJoinPoint.getSignature();
+        MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
 
         Object[] args = proceedingJoinPoint.getArgs();
 
         int indexOfParameter = getIndexOfParameter(signature.getMethod().getParameterAnnotations(), UserName.class);
 
-        if(indexOfParameter != -1){
+        if (indexOfParameter != -1) {
             args[indexOfParameter] = getUserName();
         }
 
         return proceedingJoinPoint.proceed(args);
-    }
-
-    private Object getUserName() {
-
-       // Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return "mtema";
     }
 }

@@ -16,7 +16,7 @@ public class MessageEventService {
     private ApplicationEventPublisher eventPublisher;
 
     @PostConstruct
-    public void init() {
+    private void init() { //NOSONAR
         log.debug("init " + MessageEventService.class.getCanonicalName());
     }
 

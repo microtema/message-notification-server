@@ -6,7 +6,6 @@ import lombok.extern.log4j.Log4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.AsyncContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -29,7 +28,15 @@ public class SSEServlet extends HttpServlet {
 
     private static final Map<String, PrintWriter> BROADCAST = Collections.synchronizedMap(new HashMap<>());
 
+    private static void sentComment(PrintWriter writer, String command, Object data) {
 
+        writer.write("event: " + command + "\n");
+        writer.write("data: " + data + "\n\n");
+
+        writer.flush();
+    }
+
+    @Override
     protected void service(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
 
         AsyncContext context = req.startAsync();
@@ -45,14 +52,6 @@ public class SSEServlet extends HttpServlet {
         sentComment(actxResponse.getWriter(), "connect", Boolean.TRUE);
 
         BROADCAST.put(getUserName(req), writer);
-    }
-
-    private void sentComment(PrintWriter writer, String command, Object data) {
-
-        writer.write("event: " + command + "\n");
-        writer.write("data: " + data + "\n\n");
-
-        writer.flush();
     }
 
     /**
@@ -82,11 +81,13 @@ public class SSEServlet extends HttpServlet {
         sentComment(writer, "message", MessageType.UNREAD);
     }
 
+    @Override
     public void destroy() {
         BROADCAST.clear();
     }
 
-    private String getUserName(ServletRequest req) {
-        return "mtema";
+    private String getUserName(ServletRequest req) { //NOSONAR
+
+        return "mtema"; // Authentication auth = SecurityContextHolder.getContext().getAuthentication(); //NOSONAR
     }
 }

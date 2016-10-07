@@ -1,0 +1,19 @@
+<settings>
+    <pluginGroups>
+        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+    </pluginGroups>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <sonar.jdbc.url>jdbc:sqlserver://localhost;databaseName=sonar</sonar.jdbc.url>
+                <sonar.jdbc.username>sa</sonar.jdbc.username>
+                <sonar.jdbc.password>secret</sonar.jdbc.password>
+                <sonar.host.url>http://localhost:9000/sonar</sonar.host.url>
+            </properties>
+        </profile>
+    </profiles>
+</settings>

@@ -55,7 +55,7 @@ public class MessageResource {
 
     @DELETE
     @Path("/all")
-    public Response deleteAllCurrentUserMessages(@UserName String userName) {
+    public Response deleteAllCurrentUserMassages(@UserName String userName) {
         logger.debug("delete  all messages for current user: " + userName);
 
         return Response.ok(facade.deleteMassage(userName)).build();

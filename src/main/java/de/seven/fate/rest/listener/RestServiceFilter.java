@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @Slf4j
 @Component
@@ -30,7 +31,7 @@ public class RestServiceFilter implements Filter {
 
         // Add CORS header
         String clientOrigin = httpServletRequest.getHeader("origin");
-        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", Optional.ofNullable(clientOrigin).orElse("*"));
         httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
         httpServletResponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
         httpServletResponse.setHeader("Access-Control-Allow-Headers", "Content-Type");
@@ -44,6 +45,7 @@ public class RestServiceFilter implements Filter {
      */
     @Override
     public void destroy() {
+        log.info("Filter [/rest/*] will be destroyed");
     }
 
 }
