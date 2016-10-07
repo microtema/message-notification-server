@@ -2,7 +2,7 @@ package de.seven.fate.event;
 
 import java.io.Serializable;
 
-public abstract class PersonRelatedEventData<T> implements Serializable {
+public abstract class PersonRelatedEventData<T extends Serializable> implements Serializable {
 
     private final String ldapId;
     private final T data;
@@ -22,9 +22,6 @@ public abstract class PersonRelatedEventData<T> implements Serializable {
 
     @Override
     public String toString() {
-        return "UserRelatedEventData{" +
-                "ldapId='" + ldapId + '\'' +
-                ", data=" + data +
-                '}';
+        return "UserRelatedEventData{" + "ldapId='" + ldapId + '\'' + ", data=" + data + '}';
     }
 }

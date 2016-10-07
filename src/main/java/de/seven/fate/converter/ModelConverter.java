@@ -13,4 +13,6 @@ public interface ModelConverter<D, O> {
     List<D> convertList(Collection<O> entries);
 
     Set<D> convertSet(Collection<O> entries);
+
+    Class<D> getDestinationType();
 }

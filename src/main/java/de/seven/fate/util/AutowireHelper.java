@@ -27,16 +27,16 @@ public final class AutowireHelper implements ApplicationContextAware {
         }
     }
 
-    @Override
-    public void setApplicationContext(final ApplicationContext applicationContext) {
-        AutowireHelper.applicationContext = applicationContext;
-    }
-
     /**
      * @return the singleton instance.
      */
     public static AutowireHelper getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) {
+        AutowireHelper.applicationContext = applicationContext; // NOSONAR
     }
 
 }

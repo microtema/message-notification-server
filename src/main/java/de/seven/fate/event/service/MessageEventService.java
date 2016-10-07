@@ -4,7 +4,6 @@ import de.seven.fate.event.MessageEventData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -17,7 +16,7 @@ public class MessageEventService {
     private ApplicationEventPublisher eventPublisher;
 
     @PostConstruct
-    private void init() {
+    public void init() {
         log.debug("init " + MessageEventService.class.getCanonicalName());
     }
 

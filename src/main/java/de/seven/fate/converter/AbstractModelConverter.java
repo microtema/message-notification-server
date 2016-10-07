@@ -5,9 +5,12 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.Validate.notNull;
@@ -41,12 +44,13 @@ public abstract class AbstractModelConverter<D, O> implements ModelConverter<D, 
 
         try {
             PropertyUtils.copyProperties(dest, orig);
-        } catch (Exception any) {
-            LOGGER.warn("unable to copy properties from: " + orig + " to " + dest);
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            LOGGER.warn("unable to copy properties from: " + orig + " to " + dest, e);
         }
 
     }
 
+    @Override
     public List<D> convertList(Collection<O> entries) {
         if (isEmpty(entries)) {
             return Collections.emptyList();
@@ -55,6 +59,7 @@ public abstract class AbstractModelConverter<D, O> implements ModelConverter<D, 
         return entries.stream().map(this::convert).collect(Collectors.toList());
     }
 
+    @Override
     public Set<D> convertSet(Collection<O> entries) {
         if (isEmpty(entries)) {
             return Collections.emptySet();
@@ -63,6 +68,7 @@ public abstract class AbstractModelConverter<D, O> implements ModelConverter<D, 
         return entries.stream().map(this::convert).collect(Collectors.toSet());
     }
 
+    @Override
     public Class<D> getDestinationType() {
 
         return ClassUtil.getGenericType(getClass(), 0);
