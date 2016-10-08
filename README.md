@@ -7,14 +7,26 @@ Message Notification Center (Server)
 
 > @GET    /rest/person will return current login Person/User
 
-#Message
+##Message
+
+#Entity
+
+* **Description**  String ( length = 2048 )
+* **Image**  String ( Image Path )
+* **Title**  String ( length = 256 )
+* **PubDate**  Publication Day ( DateTime)
+* **MessageType**  ( READ, UNREAD )
+
+#REST-API
 
 > @GET    /rest/message/ will return all Messages for current login Person/User
+
 > @GET    /rest/message/type/{messageType} will return all Messages filtered by MessageType for current login Person/User
 
 > @POST   /rest/message/ @BODY{Message} will update MessageType for current login Person/User
 
 > @DELETE   /rest/message will delete all Messages for current login Person/User
+
 > @DELETE   /rest/message/{ids} will delete all Messages by given ids for current login Person/User
 
 #Describe Message Notification Project
