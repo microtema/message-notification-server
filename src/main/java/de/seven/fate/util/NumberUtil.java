@@ -1,14 +1,15 @@
 package de.seven.fate.util;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+@UtilityClass
 public final class NumberUtil {
 
-    private NumberUtil() {
-    }
 
     public static int random(int minSize, int maxSize) {
         if (minSize > maxSize) {

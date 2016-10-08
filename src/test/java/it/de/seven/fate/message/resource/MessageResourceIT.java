@@ -25,7 +25,7 @@ import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static de.seven.fate.util.CollectionUtils.toMap;
+import static java.util.Collections.singletonMap;
 import static org.junit.Assert.assertEquals;
 
 @ActiveProfiles("test")
@@ -68,7 +68,7 @@ public class MessageResourceIT {
     public void getUnreadMessages() {
         String url = "/rest/message/type/{type}";
 
-        ResponseEntity<List<MessageBO>> entity = restTemplate.exchange(url, HttpMethod.GET, null, LIST_MESSAGE_BO_TYPE, toMap("type", MessageType.UNREAD));
+        ResponseEntity<List<MessageBO>> entity = restTemplate.exchange(url, HttpMethod.GET, null, LIST_MESSAGE_BO_TYPE, singletonMap("type", MessageType.UNREAD));
 
         assertEquals(entity.getStatusCode(), HttpStatus.OK);
 
@@ -83,7 +83,7 @@ public class MessageResourceIT {
     public void getReadMessages() {
         String url = "/rest/message/type/{type}";
 
-        ResponseEntity<List<MessageBO>> entity = restTemplate.exchange(url, HttpMethod.GET, null, LIST_MESSAGE_BO_TYPE, toMap("type", MessageType.READ));
+        ResponseEntity<List<MessageBO>> entity = restTemplate.exchange(url, HttpMethod.GET, null, LIST_MESSAGE_BO_TYPE, singletonMap("type", MessageType.READ));
 
         assertEquals(entity.getStatusCode(), HttpStatus.OK);
 
@@ -97,7 +97,7 @@ public class MessageResourceIT {
 
         String url = "/rest/message/{messageIds}";
 
-        ResponseEntity<MessageType> entity = restTemplate.postForEntity(url, null, MessageType.class, toMap("messageIds", StringUtils.join(ids, ",")));
+        ResponseEntity<MessageType> entity = restTemplate.postForEntity(url, null, MessageType.class, singletonMap("messageIds", StringUtils.join(ids, ",")));
 
         assertEquals(entity.getStatusCode(), HttpStatus.OK);
 
@@ -111,7 +111,7 @@ public class MessageResourceIT {
 
         String url = "/rest/message/{id}";
 
-        restTemplate.delete(url, toMap("id", id));
+        restTemplate.delete(url, singletonMap("id", id));
     }
 
     @Test
