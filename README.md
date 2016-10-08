@@ -1,15 +1,23 @@
 # notification-center-server
 Message Notification Center (Server)
 
-### REST API
+
 
 #Person
 
+###Entity
+
+* **LdapId**  String ( length = 128 )
+* **FirstName**  String ( Image Path )
+* **LastName**  String ( length = 256 )
+
+### REST API
+
 > @GET    /rest/person will return current login Person/User
 
-##Message
+#Message
 
-#Entity
+###Entity
 
 * **Description**  String ( length = 2048 )
 * **Image**  String ( Image Path )
@@ -17,7 +25,7 @@ Message Notification Center (Server)
 * **PubDate**  Publication Day ( DateTime)
 * **MessageType**  ( READ, UNREAD )
 
-#REST-API
+###REST-API
 
 > @GET    /rest/message/ will return all Messages for current login Person/User
 
