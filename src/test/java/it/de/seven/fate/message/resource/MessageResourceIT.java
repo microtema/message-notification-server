@@ -4,45 +4,33 @@ import de.seven.fate.Application;
 import de.seven.fate.annotation.Model;
 import de.seven.fate.enums.ModelType;
 import de.seven.fate.message.bo.MessageBO;
-import de.seven.fate.message.dao.MessageDAO;
-import de.seven.fate.message.domain.Message;
 import de.seven.fate.message.enums.MessageType;
 import de.seven.fate.person.dao.PersonDAO;
 import de.seven.fate.person.domain.Person;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.transaction.UserTransaction;
-
-import org.springframework.http.HttpMethod;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static de.seven.fate.util.CollectionUtils.toMap;
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MessageResourceIT {
 
     public static final ParameterizedTypeReference<List<MessageBO>> LIST_MESSAGE_BO_TYPE = new ParameterizedTypeReference<List<MessageBO>>() {
