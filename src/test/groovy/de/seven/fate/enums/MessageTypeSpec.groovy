@@ -1,15 +1,16 @@
-package de.seven.fate.message.enums
+package de.seven.fate.enums
 
+import de.seven.fate.message.enums.MessageType
 import spock.lang.Specification
 
 class MessageTypeSpec extends Specification {
 
-    def "ModelsType's length"() {
+    def "MessageType's length"() {
         expect:
         MessageType.values().length == 2
     }
 
-    def "ModelsType's name"() {
+    def "MessageType's name"() {
         expect:
         type.name() == name
 
@@ -22,10 +23,10 @@ class MessageTypeSpec extends Specification {
 
     def "MessageType's ordinal"() {
         expect:
-        role.ordinal() == ordinal
+        type.ordinal() == ordinal
 
         where:
-        role               | ordinal
+        type               | ordinal
         MessageType.UNREAD | 0
         MessageType.READ   | 1
     }

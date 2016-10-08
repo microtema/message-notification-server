@@ -43,11 +43,12 @@ Message Notification Center (Server)
 
 * **Java**  ( SDK 1.8)
 * **Apache Maven**  ( 3.2.3 )
-* **Postgres Server**  ( 9.3)
-* **GIT**  ( 2.7.1)
-* **SourceTree**  ( 1.7.0)
-* **IDE**  ( 16.2.0)
-* **Tomcat**  ( 8.5.4)
+* **Postgres Server**  ( 9.3 )
+* **GIT**  ( 2.7.1 )
+* **SourceTree**  ( 1.7.0 )
+* **IDE**  ( 16.2.0 )
+* **Tomcat**  ( 8.5.4 )
+* **Groovy**  ( 2.4 )
 
 
 ### Development
@@ -68,6 +69,7 @@ Message Notification Center (Server)
 * **Lombok**  ( 1.16.10 )
 * **Apache Camel Route**  ( 2.16.4 )
 * **Apache Camel Jaxb**  ( 2.17.0 )
+* **Groovy Spock Framework**  ( 1.0-groovy-2.4 )
 
 We'll be building a simple but realistic Message Notification Center with Spring Boot that you can read and edit, a basic version of the realtime Messages offered by RESTServer.
 
