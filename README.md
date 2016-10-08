@@ -8,7 +8,7 @@ Message Notification Center (Server)
 ###Entity
 
 * **LdapId**  String ( length = 128 )
-* **FirstName**  String ( Image Path )
+* **FirstName**  String ( length = 256 )
 * **LastName**  String ( length = 256 )
 
 ### REST API
@@ -22,7 +22,7 @@ Message Notification Center (Server)
 * **Description**  String ( length = 2048 )
 * **Image**  String ( Image Path )
 * **Title**  String ( length = 256 )
-* **PubDate**  Publication Day ( DateTime)
+* **PubDate**  Publication Day ( DateTime )
 * **MessageType**  ( READ, UNREAD )
 
 ###REST-API
