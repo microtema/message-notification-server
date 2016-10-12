@@ -53,7 +53,7 @@ public class MessageRouteIT {
     private void testMessages() throws Exception { //NOSONAR
 
         while (service.findMessagesByPerson("mtema").size() != 12) {
-            Thread.currentThread().sleep(100);
+            Thread.sleep(100);
         }
 
         assertTrue(true);
