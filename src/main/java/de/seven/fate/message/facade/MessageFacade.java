@@ -8,7 +8,7 @@ import de.seven.fate.message.converter.MessageBO2MessageConverter;
 import de.seven.fate.message.domain.Message;
 import de.seven.fate.message.enums.MessageType;
 import de.seven.fate.message.service.MessageService;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.event.EventListener;
@@ -19,7 +19,7 @@ import java.util.List;
 
 import static org.apache.commons.lang3.Validate.notNull;
 
-@Slf4j
+@Log4j2
 @Component
 public class MessageFacade {
 

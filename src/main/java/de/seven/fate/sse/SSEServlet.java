@@ -2,7 +2,7 @@ package de.seven.fate.sse;
 
 import de.seven.fate.event.MessageEventData;
 import de.seven.fate.message.enums.MessageType;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-@Log4j
+@Log4j2
 @Component
 @WebServlet(value = "/sse", asyncSupported = true)
 public class SSEServlet extends HttpServlet {

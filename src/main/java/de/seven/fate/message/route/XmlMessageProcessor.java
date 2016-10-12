@@ -1,26 +1,26 @@
 package de.seven.fate.message.route;
 
-import de.seven.fate.message.Constants;
 import de.seven.fate.message.dto.MessagesDTO;
-import de.seven.fate.message.service.XmlMessageService;
+import lombok.extern.log4j.Log4j2;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
-
+@Log4j2
 @Component
 public class XmlMessageProcessor implements Processor {
-
-    @Inject
-    private XmlMessageService messageService;
 
     @Override
     public void process(Exchange exchange) throws Exception {
 
         MessagesDTO messagesDTO = exchange.getIn().getBody(MessagesDTO.class);
 
-        messageService.process(messagesDTO.getMessages());
+        String uuid = messagesDTO.getUuid();
+
+        log.debug("Set UUID[" + uuid + "] for From-Route-ID: " + exchange.getFromRouteId());
+
+        exchange.getOut().setHeader("UUID", uuid);
+
+        exchange.getOut().setBody(messagesDTO);
     }
 }

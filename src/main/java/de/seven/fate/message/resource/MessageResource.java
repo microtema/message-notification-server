@@ -4,7 +4,7 @@ import de.seven.fate.message.enums.MessageType;
 import de.seven.fate.message.enums.UserName;
 import de.seven.fate.message.facade.MessageFacade;
 import de.seven.fate.util.NumberUtil;
-import lombok.extern.slf4j.Slf4j;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -12,7 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Slf4j
+@Log4j2
 @Component
 @Path("/message")
 @Produces(MediaType.APPLICATION_JSON)
