@@ -20,25 +20,19 @@ public class MessageRoute extends RouteBuilder {
     /**
      * There are many Idempotent-Consumer-Repositories available, we Just peek the Memory one.
      *
-     * @see http://camel.apache.org/idempotent-consumer.html
+     * @see {http://camel.apache.org/idempotent-consumer.html}
      */
     private static final IdempotentRepository<String> IDEMPOTENT_REPOSITORY = memoryIdempotentRepository(200);
 
-
-    @Value("${message.route.from}")
-    private String fromUri;
-
-    @Value("${message.route.to}")
-    private String toUri;
-
-    @Value("${message.route.seda.endpoint}")
-    private String sedaEndpoint;
 
     @Value("${message.schema.location}")
     private String schemaLocation;
 
     @Inject
     private XmlMessageProcessor messageProcessor;
+
+    @Inject
+    private MessageCountProcessor messageCountProcessor;
 
     private JaxbDataFormat messagesData;
 
@@ -61,15 +55,22 @@ public class MessageRoute extends RouteBuilder {
     @Override
     public void configure() throws Exception {
 
-        from(fromUri)
+        from("{{message.route.from}}")
                 .routeId("from_uri_to_seda_message_route")
                 .unmarshal(messagesData)
                 .process(messageProcessor)
-                .to(sedaEndpoint);
+                .to("{{message.route.seda.endpoint}}");
 
-        from(sedaEndpoint)
+        from("{{message.route.seda.endpoint}}")
                 .routeId("from_seda_to_uri_message_route")
                 .idempotentConsumer(header("UUID"), IDEMPOTENT_REPOSITORY)
-                .to(toUri);
+                .to("{{message.route.to}}");
+
+
+        //A JDBC based repository for the Idempotent Consumer EIP pattern
+        from("sql:select count(*) from Message?dataSource=dataSource&consumer.delay=5000")
+                .routeId("jdbc_idempotent_route")
+                .process(messageCountProcessor)
+                .to("log:de.seven.fate.message.domain.Message?level=DEBUG");
     }
 }
