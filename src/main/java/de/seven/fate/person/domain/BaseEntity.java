@@ -13,12 +13,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.ZonedDateTime;
 
-@MappedSuperclass
-@Audited
-@EntityListeners(AuditingEntityListener.class)
+
 @Data
+@Audited
+@MappedSuperclass
 @EqualsAndHashCode(exclude = {"id", "createdBy", "createdDate", "lastModifiedBy", "lastModifiedDate"})
-public class BaseEntity  implements Serializable {
+@EntityListeners(AuditingEntityListener.class)
+public class BaseEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

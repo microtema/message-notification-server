@@ -12,12 +12,13 @@ import javax.inject.Inject;
 import java.util.Collection;
 import java.util.Set;
 
-import static org.apache.camel.spring.util.ReflectionUtils.setField;
-import static org.springframework.util.ReflectionUtils.doWithFields;
-import static org.springframework.util.ReflectionUtils.makeAccessible;
+import static org.springframework.util.ReflectionUtils.*;
 
 @Component
 public class ModelsProcessor implements BeanPostProcessor {
+
+    @Inject
+    private Set<ModelBuilder> modelBuilders;
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -42,8 +43,12 @@ public class ModelsProcessor implements BeanPostProcessor {
         switch (models.type()) {
             case LIST:
                 return modelBuilder.list(models.size());
+            case FIX_LIST:
+                return modelBuilder.fixList();
             case SET:
                 return modelBuilder.set(models.size());
+            case FIX_SET:
+                return modelBuilder.fixSet();
         }
 
         throw new IllegalStateException("Unsupported models type: " + models.type());
@@ -53,7 +58,4 @@ public class ModelsProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return bean;
     }
-
-    @Inject
-    private Set<ModelBuilder> modelBuilders;
 }

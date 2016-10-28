@@ -5,8 +5,7 @@ import de.seven.fate.message.domain.Message;
 import de.seven.fate.message.enums.MessageType;
 import de.seven.fate.person.dao.PersonDAO;
 import de.seven.fate.person.domain.Person;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -16,10 +15,9 @@ import java.util.List;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.lang3.Validate.notNull;
 
+@Slf4j
 @Service
 public class MessageService {
-
-    private static final Logger logger = LoggerFactory.getLogger(MessageService.class);
 
     @Inject
     private MessageDAO dao;
@@ -45,18 +43,20 @@ public class MessageService {
 
     public void removeMessage(Message message) {
 
+        message.setPerson(null);
         dao.delete(message);
     }
 
     public void removeMessage(Long messageId) {
 
-        dao.delete(messageId);
+        removeMessage(dao.findOne(messageId));
     }
 
     public void saveMessage(Message message) {
 
         saveMessage(Arrays.asList(message), message.getPerson());
     }
+
 
     public void saveMessage(List<Message> messages) {
 
@@ -74,12 +74,20 @@ public class MessageService {
         notNull(messages);
         notNull(person);
 
-        Person attachedPerson = personDAO.findOne(person.getId());
+        if (messages.isEmpty()) {
+            log.warn("ignore empty messages by: " + person.getLdapId());
+
+            return;
+        }
+
+        Person attachedPerson = personDAO.findByLdapId(person.getLdapId());
 
         if (attachedPerson == null) {
 
-            logger.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
-            return;
+            log.warn("unable to find person by: " + person.getLdapId() + " message will be ignored");
+
+            attachedPerson = personDAO.save(person);
+            // return; //NOSONAR this is workaround and will be removed in production env.
         }
 
         for (Message message : messages) {
@@ -87,6 +95,9 @@ public class MessageService {
         }
 
         dao.save(messages);
+
+        log.debug("save [" + messages.size() + "] message(s) by person: " + person.getLdapId());
+
     }
 
     public void removeAllMessage(String personLdapId) {
@@ -106,8 +117,7 @@ public class MessageService {
         }
 
         int executeUpdate = dao.markMessage(messageIds, messageType);
-        // int executeUpdate = dao.createNamedQuery(Message.UPDATE_TYPE, "ids", messageIds, "messageType", messageType).executeUpdate();
 
-        logger.info("update " + executeUpdate + " messages to type: " + messageType);
+        log.info("update " + executeUpdate + " messages to type: " + messageType);
     }
 }

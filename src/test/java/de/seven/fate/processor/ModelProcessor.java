@@ -10,12 +10,13 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import java.util.Set;
 
-import static org.apache.camel.spring.util.ReflectionUtils.setField;
-import static org.springframework.util.ReflectionUtils.doWithFields;
-import static org.springframework.util.ReflectionUtils.makeAccessible;
+import static org.springframework.util.ReflectionUtils.*;
 
 @Component
 public class ModelProcessor implements BeanPostProcessor {
+
+    @Inject
+    private Set<ModelBuilder> modelBuilders;
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
@@ -44,6 +45,8 @@ public class ModelProcessor implements BeanPostProcessor {
                 return modelBuilder.max();
             case RANDOM:
                 return modelBuilder.random();
+            case FIX:
+                return modelBuilder.fix();
         }
 
         throw new IllegalStateException("Unsupported model type: " + model.type());
@@ -53,7 +56,4 @@ public class ModelProcessor implements BeanPostProcessor {
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         return bean;
     }
-
-    @Inject
-    private Set<ModelBuilder> modelBuilders;
 }

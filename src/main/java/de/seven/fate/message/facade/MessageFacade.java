@@ -1,19 +1,25 @@
 package de.seven.fate.message.facade;
 
-import de.seven.fate.cache.UserCacheService;
+import de.seven.fate.event.MessageEventData;
+import de.seven.fate.message.Constants;
 import de.seven.fate.message.bo.MessageBO;
-import de.seven.fate.message.converter.Message2MessageBOModelConverter;
-import de.seven.fate.message.converter.MessageBO2MessageModelConverter;
+import de.seven.fate.message.converter.Message2MessageBOConverter;
+import de.seven.fate.message.converter.MessageBO2MessageConverter;
 import de.seven.fate.message.domain.Message;
-import de.seven.fate.message.enums.AttributeName;
 import de.seven.fate.message.enums.MessageType;
 import de.seven.fate.message.service.MessageService;
-import org.apache.commons.lang3.Validate;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.util.List;
 
+import static org.apache.commons.lang3.Validate.notNull;
+
+@Log4j2
 @Component
 public class MessageFacade {
 
@@ -21,39 +27,31 @@ public class MessageFacade {
     private MessageService service;
 
     @Inject
-    private UserCacheService userCacheService;
+    private Message2MessageBOConverter message2MessageBOConverter;
 
     @Inject
-    private Message2MessageBOModelConverter message2MessageBOConverter;
-
-    @Inject
-    private MessageBO2MessageModelConverter messageBO2MessageConverter;
+    private MessageBO2MessageConverter messageBO2MessageConverter;
 
     /**
      * first lookup in user cache than in DB
      *
-     * @param ldapId
+     * @param personLdapId
      * @return messages for given ldapId
      */
-    public List<MessageBO> findMessagesByPerson(String ldapId) {
-        Validate.notNull(ldapId);
+    @Cacheable(Constants.MESSAGE_CACHE)
+    public List<MessageBO> findMessagesByPerson(String personLdapId) {
+        notNull(personLdapId);
 
-        List<MessageBO> messageBOList = userCacheService.getAttribute(ldapId, AttributeName.MESSAGES);
+        List<Message> messages = service.findMessagesByPerson(personLdapId);
 
-        if (messageBOList == null) {
-            List<Message> messages = service.findMessagesByPerson(ldapId);
-
-            messageBOList = message2MessageBOConverter.convertList(messages);
-            userCacheService.setAttribute(ldapId, AttributeName.MESSAGES, messageBOList);
-        }
-
-        return messageBOList;
+        return message2MessageBOConverter.convertList(messages);
     }
 
-    public MessageBO updateMassage(String ldapId, MessageBO messageBO) {
-        Validate.notNull(messageBO);
+    @CacheEvict(cacheNames = Constants.MESSAGE_CACHE, allEntries = true)
+    public MessageBO updateMassage(String personLdapId, MessageBO messageBO) {
+        notNull(messageBO);
 
-        userCacheService.removeAttributes(ldapId);
+        log.debug("update message from user: " + personLdapId);
 
         Message message = messageBO2MessageConverter.convert(messageBO);
 
@@ -62,39 +60,54 @@ public class MessageFacade {
         return message2MessageBOConverter.convert(updateMessage);
     }
 
-    public Boolean deleteMassage(String ldapId, List<Long> messageIds) {
+    @CacheEvict(cacheNames = Constants.MESSAGE_CACHE, allEntries = true)
+    public Boolean deleteMassage(String personLdapId, List<Long> messageIds) { //NOSONAR
+
+        log.debug("delete " + messageIds.size() + " message(s) from user: " + personLdapId);
 
         for (Long messageId : messageIds) {
             service.removeMessage(messageId);
         }
 
-        userCacheService.removeAttributes(ldapId);
-
         return Boolean.TRUE;
     }
 
+    @CacheEvict(cacheNames = Constants.MESSAGE_CACHE, allEntries = true)
     public Boolean deleteMassage(String personLdapId) {
 
         service.removeAllMessage(personLdapId);
 
-        userCacheService.removeAttributes(personLdapId);
-
         return Boolean.TRUE;
     }
 
-    public List<MessageBO> findMessagesByPersonAndType(String userName, MessageType messageType) {
 
-        List<Message> messages = service.findMessagesByPersonAndType(userName, messageType);
+    public List<MessageBO> findMessagesByPersonAndType(String personLdapId, MessageType messageType) {
+
+        List<Message> messages = service.findMessagesByPersonAndType(personLdapId, messageType);
 
         return message2MessageBOConverter.convertList(messages);
     }
 
-    public Boolean markMessageAsRead(String personLdapId, List<Long> messageIds) {
+    @CacheEvict(cacheNames = Constants.MESSAGE_CACHE, allEntries = true)
+    public MessageType markMessageAsRead(String personLdapId, List<Long> messageIds) {
+
+        log.debug("mark " + messageIds + " message(s) as read fro user: " + personLdapId);
 
         service.markMessage(messageIds, MessageType.READ);
 
-        userCacheService.removeAttributes(personLdapId);
+        return MessageType.READ;
+    }
 
-        return Boolean.TRUE;
+    @EventListener
+    protected void onMessageChangeEvent(MessageEventData eventData) {
+
+        String ldapId = eventData.getLdapId();
+
+        evictCache(ldapId);
+    }
+
+    @CacheEvict(cacheNames = Constants.MESSAGE_CACHE, allEntries = true)
+    public void evictCache(String ldapId) {
+        log.debug("evict user cache for: " + ldapId);
     }
 }

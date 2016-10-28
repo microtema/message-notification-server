@@ -1,14 +1,18 @@
 package de.seven.fate.util;
 
+import lombok.experimental.UtilityClass;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
+@UtilityClass
 public final class ClassUtil {
 
     public static <T> T getGenericType(Class<?> classType, int index) {
         ParameterizedType genericSuperclass = (ParameterizedType) classType.getGenericSuperclass();
-        return getGenericType(genericSuperclass, 0);
+
+        return getGenericType(genericSuperclass, index);
     }
 
     public static <T> T getGenericType(Type classType, int index) {
@@ -24,9 +28,10 @@ public final class ClassUtil {
         try {
             return genericType.newInstance();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new IllegalArgumentException("Unable to create new instance of " + genericType, e);
         }
     }
+
     public static int getIndexOfParameter(Annotation[][] annotations, Class<?> annotationType) {
 
         for (int index = 0; index < annotations.length; index++) {

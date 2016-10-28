@@ -31,6 +31,11 @@ public abstract class AbstractModelBuilder<T> implements ModelBuilder<T> {
     }
 
     @Override
+    public T fix() {
+        return min();
+    }
+
+    @Override
     public List<T> list() {
 
         return list(randomCollectionSize());
@@ -41,17 +46,29 @@ public abstract class AbstractModelBuilder<T> implements ModelBuilder<T> {
 
         List<T> list = new ArrayList<>();
 
-        fillCollection(size, list);
+        fillCollection(size, list, this::random);
 
         return list;
     }
+
+    @Override
+    public List<T> fixList() {
+
+        List<T> list = new ArrayList<>();
+
+        fillCollection(MAX_COLLECTION_SIZE/2, list, this::fix);
+
+        return list;
+    }
+
+
 
     @Override
     public Set<T> set(int size) {
 
         Set<T> set = new HashSet<>();
 
-        fillCollection(size, set);
+        fillCollection(size, set, this::random);
 
         return set;
     }
@@ -62,21 +79,32 @@ public abstract class AbstractModelBuilder<T> implements ModelBuilder<T> {
         return set(randomCollectionSize());
     }
 
+    @Override
+    public Set<T> fixSet() {
+
+        Set<T> list = new HashSet<>();
+
+        fillCollection(MAX_COLLECTION_SIZE/2, list, this::fix);
+
+        return list;
+    }
+
     /*
      * ATTENTION! Size of Collection of type Set can be less than size, when adding multiple the same Object
      */
-    private void fillCollection(int size, Collection<T> collection) {
+    private void fillCollection(int size, Collection<T> collection, GenerateModel<T> generateModel) {
 
-        if(AUTO_COLLECTION_SIZE == size)
-        {
+        if (AUTO_COLLECTION_SIZE == size) {
             size = randomCollectionSize();
         }
 
         int count = 0;
         while (count++ < size) {
-            collection.add(random());
+            collection.add(generateModel.generate());
         }
     }
+
+
 
     @Override
     public Class<T> getTargetType() {
@@ -91,5 +119,9 @@ public abstract class AbstractModelBuilder<T> implements ModelBuilder<T> {
     private static int randomCollectionSize() {
 
         return Math.max(MIN_COLLECTION_SIZE, new Random().nextInt(MAX_COLLECTION_SIZE));
+    }
+
+    interface GenerateModel<T>{
+        T generate();
     }
 }

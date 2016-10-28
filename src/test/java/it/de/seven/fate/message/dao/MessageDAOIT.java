@@ -25,11 +25,11 @@ import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertEquals;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
-@ActiveProfiles("test")
 @Transactional
-public class MessageDAOTest {
+public class MessageDAOIT {
 
     @Inject
     MessageDAO sut;
@@ -43,7 +43,7 @@ public class MessageDAOTest {
     @Model
     Person person;
 
-    @Models(type = ModelsType.LIST, size = -1)
+    @Models
     List<Message> models;
 
     @Before
@@ -56,11 +56,6 @@ public class MessageDAOTest {
     @Test
     public void findOne() {
         assertEquals(model, sut.findOne(model.getId()));
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        sut.deleteAll();
     }
 
     @Test

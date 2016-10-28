@@ -1,5 +1,5 @@
 package de.seven.fate.enums;
 
 public enum ModelType {
-    MIN, MAX, RANDOM;
+    MIN, MAX, RANDOM, FIX;
 }

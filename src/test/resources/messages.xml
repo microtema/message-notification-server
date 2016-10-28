@@ -1,0 +1,136 @@
+<messages uuid="1000">
+<message>
+    <person>
+    <ldapId>mtema</ldapId>
+    </person>
+    <title>Red Hat JBoss Middleware</title>
+    <description>Red Hat JBoss Middleware is a portfolio of enterprise-class application and integration middleware software products delivered by Red Hat, Inc. These software products are used by end users to create applications; integrate applications, data, and devices; and automate business processes. Red Hat JBoss Middleware uses an open source development model.</description>
+    <image>img/jboss.png</image>
+    <pubDate>2016-02-15T13:22:08.521+01:00</pubDate>
+  </message>
+
+  <message>
+      <person>
+      <ldapId>mtema</ldapId>
+      </person>
+      <title>React A JAVASCRIPT LIBRARY FOR BUILDING USER INTERFACES</title>
+      <description>JUST THE UI  Lots of people use React as the V in MVC. Since React makes no assumptions about the rest of your technology stack, it's easy to try it out on a small feature in an existing project.  VIRTUAL DOM React abstracts away the DOM from you, giving a simpler programming model and better performance. React can also render on the server using Node, and it can power native apps using React Native. DATA FLOW  React implements one-way reactive data flow which reduces boilerplate and is easier to reason about than traditional data binding.</description>
+      <image>img/react.png</image>
+      <pubDate>2016-02-15T13:24:38.521+01:00</pubDate>
+    </message>
+    <message>
+        <person>
+        <ldapId>mtema</ldapId>
+        </person>
+        <title>HTML5</title>
+        <description>HTML5 is a markup language used for structuring and presenting content on the World Wide Web. It was finalized, and published, on 28 October 2014 by the World Wide Web Consortium (W3C).[2][3] This is the fifth revision of the HTML standard since the inception of the World Wide Web. The previous version, HTML 4, was standardized in 1997. Its core aims are to improve the language with support for the latest multimedia while keeping it easily readable by humans and consistently understood by computers and devices (web browsers, parsers, etc.). HTML5 is intended to subsume not only HTML 4, but also XHTML 1 and DOM Level 2 HTML.[4] Following its immediate predecessors HTML 4.01 and XHTML 1.1, HTML5 is a response to the fact that the HTML and XHTML in common use on the World Wide Web have a mixture of features introduced by various specifications, along with those introduced by software</description>
+        <image>img/html5.gif</image>
+        <pubDate>2016-02-15T13:24:58.521+01:00</pubDate>
+      </message>
+      <message>
+          <person>
+          <ldapId>mtema</ldapId>
+          </person>
+          <title>Apache Camel</title>
+          <description>Apache Camel is a rule-based routing and mediation engine that provides a Java object-based implementation of the Enterprise Integration Patterns using an API (or declarative Java Domain Specific Language) to configure routing and mediation rules. The domain-specific language means that Apache Camel can support type-safe smart completion of routing rules in an integrated development environment using regular Java code without large amounts of XML configuration files, though XML configuration inside Spring is also supported. Camel is often used with Apache ServiceMix, Apache ActiveMQ and Apache CXF in service-oriented architecture infrastructure projects.</description>
+          <image>img/apache-camel.png</image>
+          <pubDate>2016-02-15T13:24:48.521+01:00</pubDate>
+        </message>
+        <message>
+            <person>
+            <ldapId>mtema</ldapId>
+            </person>
+            <title>Node.js</title>
+            <description>Node.js ist eine serverseitige Plattform zum Betrieb von Netzwerkanwendungen. Insbesondere lassen sich Webserver damit realisieren. Node.js basiert auf der JavaScript-Laufzeitumgebung „V8“, die ursprünglich für Google Chrome entwickelt wurde, und bietet daher eine ressourcensparende Architektur, die eine besonders große Anzahl gleichzeitig bestehender Netzwerkverbindungen ermöglicht.[4][5][6]</description>
+            <image>img/nodejs.png</image>
+            <pubDate>2016-02-15T13:24:48.521+01:00</pubDate>
+          </message>
+          <message>
+              <person>
+              <ldapId>mtema</ldapId>
+              </person>
+              <title>Microsoft SQL Server</title>
+              <description>
+                Microsoft SQL Server is a relational database management system developed by Microsoft. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications which may run either on the same computer or on another computer across a network (including the Internet).
+                Microsoft markets at least a dozen different editions of Microsoft SQL Server, aimed at different audiences and for workloads ranging from small single-machine applications to large Internet-facing applications with many concurrent users.
+              </description>
+              <image>img/mssql.png</image>
+              <pubDate>2016-02-15T13:24:48.521+01:00</pubDate>
+            </message>
+            <message>
+                <person>
+                <ldapId>mtema</ldapId>
+                </person>
+                <title>NPM</title>
+                <description>
+As of Node.js version 0.6.3, npm is bundled and installed automatically with the environment.[2][3] npm runs through the command line and manages dependencies for an application. It also allows users to install Node.js applications that are available on the npm registry. npm is written entirely in JavaScript and was developed by Isaac Z. Schlueter as a result of the frustrations he had experienced while working with CommonJS and with inspiration from similar projects for PHP (PEAR) and Perl (CPAN).[4]
+                </description>
+                <image>img/npm.png</image>
+                <pubDate>2016-02-15T13:24:48.521+01:00</pubDate>
+              </message>
+              <message>
+                  <person>
+                  <ldapId>mtema</ldapId>
+                  </person>
+                  <title>Grunt</title>
+                  <description>
+  As of Node.js version 0.6.3, npm is bundled and installed automatically with the environment.[2][3] npm runs through the command line and manages dependencies for an application. It also allows users to install Node.js applications that are available on the npm registry. npm is written entirely in JavaScript and was developed by Isaac Z. Schlueter as a result of the frustrations he had experienced while working with CommonJS and with inspiration from similar projects for PHP (PEAR) and Perl (CPAN).[4]
+                  </description>
+                  <image>img/grunt.png</image>
+                  <pubDate>2015-02-15T13:24:48.521+01:00</pubDate>
+                </message>
+                <message>
+                    <person>
+                    <ldapId>mtema</ldapId>
+                    </person>
+                    <title>Karma</title>
+                    <description>
+                      A simple tool that allows you to execute JavaScript code in multiple real browsers.
+The main purpose of Karma is to make your test-driven development easy, fast, and fun.
+                    </description>
+                    <image>img/karma.png</image>
+                    <pubDate>2015-11-15T13:24:48.521+01:00</pubDate>
+                  </message>
+                  <message>
+                      <person>
+                      <ldapId>mtema</ldapId>
+                      </person>
+                      <title>RESTEasy</title>
+                      <description>
+                      RESTEasy is a JBoss project that provides various frameworks to help you build RESTful Web Services and RESTful Java applications. It is a fully certified and portable implementation of the JAX-RS specification. JAX-RS is a new JCP specification that provides a Java API for RESTful Web Services over the HTTP protocol.
+                      </description>
+                      <image>img/reasteasy.png</image>
+                      <pubDate>2015-11-15T13:24:48.521+01:00</pubDate>
+                    </message>
+                    <message>
+                        <person>
+                        <ldapId>mtema</ldapId>
+                        </person>
+                        <title>JPA</title>
+                        <description>
+                          How to improve JPA performance by 1,825%
+  The Java Persistence API (JPA) provides a rich persistence architecture. JPA hides much of the low level dull-drum of database access, freeing the application developer from worrying about the database, and allowing them to concentrate on developing the application. However, this abstraction can lead to poor performance, if the application programmer does not consider how their implementation affects database usage.
+
+  JPA provides several optimization features and techniques, and some pitfalls waiting to snag the unwary developer. Most JPA providers also provide a plethora of additional optimization features and options. In this blog entry I will explore the various optimizations options and techniques, and a few of the common pitfalls.
+
+  The application is a simulated database migration from a MySQL database to an Oracle database. Perhaps there are more optimal ways to migrate a database, but it is surprising how good JPA's performance can be, even in processing hundreds of thousand or even millions of records. Perhaps it is not a straight forward migration, or the application's business logic is required, or perhaps the application has already been persisted through JPA, so using JPA to migrate the database is just easiest. Regardless, this fictitious use case is a useful demonstration of how to achieve good performance with JPA.
+
+  The application consists of an Order processing database. The model contains a Customer, Order and OrderLine. The application reads all of the Orders from one database, and persists them to the second database. The source code for the example can be found here.
+                        </description>
+                        <image>img/jpa.jpeg</image>
+                        <pubDate>2016-11-15T13:24:48.521+01:00</pubDate>
+                      </message>
+                      <message>
+                          <person>
+                          <ldapId>mtema</ldapId>
+                          </person>
+                          <title>Apache Maven</title>
+                          <description>
+                            Maven is a build automation tool used primarily for Java projects. The word maven means "accumulator of knowledge" in Yiddish.[3] Maven addresses two aspects of building software: First, it describes how software is built, and second, it describes its dependencies. Contrary to preceding tools like Apache Ant, it uses conventions for the build procedure, and only exceptions need to be written down. An XML file describes the software project being built, its dependencies on other external modules and components, the build order, directories, and required plug-ins. It comes with pre-defined targets for performing certain well-defined tasks such as compilation of code and its packaging. Maven dynamically downloads Java libraries and Maven plug-ins from one or more repositories such as the Maven 2 Central Repository, and stores them in a local cache.[4] This local cache of downloaded artifacts can also be updated with artifacts created by local projects. Public repositories can also be updated.
+
+                            Maven can also be used to build and manage projects written in C#, Ruby, Scala, and other languages. The Maven project is hosted by the Apache Software Foundation, where it was formerly part of the Jakarta Project.
+                          </description>
+                          <image>img/maven.jpeg</image>
+                          <pubDate>2015-11-15T13:24:48.521+01:00</pubDate>
+                        </message>
+</messages>

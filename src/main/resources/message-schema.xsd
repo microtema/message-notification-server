@@ -5,13 +5,21 @@
 
     <xs:complexType name="messagesDTO">
         <xs:sequence>
-            <xs:element name="message" type="messageDTO" maxOccurs="unbounded"/>
+            <xs:element name="message" type="messageDTO" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
+        <xs:attribute type="xs:string" name="uuid"/>
     </xs:complexType>
 
     <xs:complexType name="messageDTO">
         <xs:sequence>
             <xs:element name="person" type="personDTO"/>
+            <xs:element name="title" minOccurs="1">
+                <xs:simpleType>
+                    <xs:restriction base="xs:string">
+                        <xs:minLength value="1"/>
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
             <xs:element name="description" minOccurs="1">
                 <xs:simpleType>
                     <xs:restriction base="xs:string">

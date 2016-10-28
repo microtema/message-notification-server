@@ -15,15 +15,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import javax.sql.DataSource;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
+@ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
-@ActiveProfiles("test")
 @Transactional
-public class PersonDAOTest {
+public class PersonDAOIT {
 
     @Inject
     PersonDAO sut;
@@ -33,6 +34,9 @@ public class PersonDAOTest {
 
     @Models
     List<Person> models;
+
+    @Inject
+    DataSource dataSource;
 
     @Before
     public void setUp() {
@@ -47,11 +51,6 @@ public class PersonDAOTest {
     @Test
     public void findByLdapId() {
         assertEquals(model, sut.findByLdapId(model.getLdapId()));
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        sut.deleteAll();
     }
 
 }
